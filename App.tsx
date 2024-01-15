@@ -1,18 +1,16 @@
 import React from 'react';
-import { SafeAreaView, Text, useColorScheme } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+import {StyleSheet, Text, View} from 'react-native';
+import CustomIcon from './src/components/CustomIcon.tsx';
+const App = () => {
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <View>
+      <CustomIcon name="like" size={25} />
       <Text>hello React Native</Text>
-    </SafeAreaView>
+    </View>
   );
-}
+};
 
 export default App;
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const styles = StyleSheet.create({});
