@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useStore } from '../store/store'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { COLORS } from '../theme/theme';
+import Header from '../components/Header';
 
 const getCategoriesFromData = (data: any) => {
   let temp: any = {};
@@ -48,6 +49,7 @@ const HomeScreen = () => {
     showsVerticalScrollIndicator={false} 
     contentContainerStyle={styles.ScrollViewFlex}>
       {/* App Header */}
+   <Header title={'Biriyani Kade'} />
     </ScrollView>
   </View>
   
@@ -63,4 +65,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default HomeScreen
+export default HomeScreen;
