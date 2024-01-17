@@ -38,16 +38,18 @@ const HomeScreen = () => {
   );
   const [searchText, setSearchText] = useState('');
   const [catagoryIndex, setCategoryIndex] = useState({
-    index: 0,
-    category: catagories[0],
+    index: 1,
+    category: catagories[1],
   });
   const [sortedBiriyani, setSortedBiriyani] = useState(getBiriyaniList(catagoryIndex.category,BiriyaniList));
   const tabBarHeight = useBottomTabBarHeight ();
 
+  // console.log('sortedBiriyani =', sortedBiriyani.length);
+
   return (
   <View style = {styles.ScreenContainer}>
     <StatusBar backgroundColor={COLORS.primaryBlackHex}/>
-    <ScrollView 
+    <ScrollView
     showsVerticalScrollIndicator={false} 
     contentContainerStyle={styles.ScrollViewFlex}>
       {/* App Header */}
@@ -79,7 +81,39 @@ const HomeScreen = () => {
           style={styles.TextInputContainer}
         />
       </View>
+      {/* Category Scroller*/}
 
+      <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.CategoryScrollViewStyle}>
+            {catagories.map((data, index) => (
+              <View key={index.toString()} style={styles.CategoryScrollViewContainer}>
+                 <TouchableOpacity 
+                  onPress={() => {
+                  setCategoryIndex({index:index,category:catagories[index]})
+                  setSortedBiriyani([
+                    ...getBiriyaniList(catagories[index], BiriyaniList),
+                  ]);
+                  }}>
+                 <Text
+                  style={[
+                    styles.CategoryText,
+                    catagoryIndex.index == index
+                      ? {color: COLORS.primaryYellowHex}
+                      : {},
+                  ]}>
+                  {data}
+                </Text>
+                {catagoryIndex.index == index ? (
+                  <View style={styles.ActiveCategory} />
+                ) : (
+                  <></>
+                )}
+                 </TouchableOpacity>
+              </View>
+              ))}
+    </ScrollView>
     </ScrollView>
   </View>
   );
@@ -115,6 +149,29 @@ const styles = StyleSheet.create({
     fontFamily: FONTFAMILY.poppins_medium,
     fontSize: FONTSIZE.size_14,
     color: COLORS.primaryWhiteHex,
+  },
+  CategoryScrollViewStyle:{
+    paddingHorizontal: SPACING.space_20,
+    marginBottom: SPACING.space_20,
+  },
+  CategoryScrollViewContainer: {
+    paddingHorizontal: SPACING.space_15,
+  },
+  CategoryScrollViewItem: {
+    alignItems: 'center',
+  },
+  CategoryText: {
+    fontFamily: FONTFAMILY.poppins_semibold,
+    fontSize: FONTSIZE.size_16,
+    color: COLORS.primaryLightGreyHex,
+    marginBottom: SPACING.space_4,
+  },
+
+  ActiveCategory: {
+    height: SPACING.space_10,
+    width: SPACING.space_10,
+    borderRadius: BORDERRADIUS.radius_10,
+    backgroundColor: COLORS.primaryYellowHex,
   },
 })
 
