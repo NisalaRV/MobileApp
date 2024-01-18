@@ -7,8 +7,6 @@ import Header from '../components/Header';
 import CustomIcon from '../components/CustomIcon';
 import BiriyaniCard from '../components/BiriyaniCard';
 
-
-
 const getCategoriesFromData = (data: any) => {
   let temp: any = {};
   for (let i = 0; i < data.length; i++) {
@@ -77,7 +75,7 @@ const HomeScreen = () => {
               />
         </TouchableOpacity>
         <TextInput
-          placeholder='Find Your Biriyani...'
+          placeholder='Find Your Choice...'
           value={searchText} 
           onChangeText={text => setSearchText(text)} 
           placeholderTextColor={COLORS.primaryLightGreyHex}
@@ -125,7 +123,7 @@ const HomeScreen = () => {
             keyExtractor={item => item.id}
             renderItem={({item}) => {
               return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() =>{} }>
               <BiriyaniCard
                id={item.id}
                index={item.index}
@@ -140,8 +138,34 @@ const HomeScreen = () => {
             </TouchableOpacity>
           );
        }}
-           />    
-           
+           />   
+       {/* Drinks list*/}
+       <Text style={styles. DrinksTitle}>Drinks</Text>
+       <FlatList
+            horizontal showsHorizontalScrollIndicator={false}
+            data={DrinksList} 
+            contentContainerStyle={[styles.FlatListContainer, {marginBottom:tabBarHeight}]}  
+            keyExtractor={item => item.id}
+            renderItem={({item}) => {
+              return (
+            <TouchableOpacity onPress={() =>{} }>
+              <BiriyaniCard
+               id={item.id}
+               index={item.index}
+               type={item.type}
+               rosted={item.rosted}
+               imagelink_square={item.imagelink_square}
+               name={item.name}
+               special_ingredient={item.special_ingredient}
+               average_rating={item.average_rating}
+               price={item.price}
+               buttonPressHandler={item.buttonPressHandler}/>
+            </TouchableOpacity>
+          );
+       }}
+           /> 
+
+          
     </ScrollView>
   </View>
   );
@@ -206,6 +230,14 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.space_20,
     paddingHorizontal: SPACING.space_30,
   },
+  DrinksTitle:{
+    fontSize:FONTSIZE.size_18,
+    marginLeft: SPACING.space_30,
+    marginTop: SPACING.space_20,
+    fontFamily: FONTFAMILY.poppins_medium,
+    color: COLORS.secondaryLightGreyHex,
+  }
+
 })
 
 export default HomeScreen;

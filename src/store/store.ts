@@ -9,7 +9,7 @@ export const useStore = create(
     persist(
         (set, get) => ({
             BiriyaniList: BiriyaniData,
-            DrinkList: DrinksData,
+            DrinksList: DrinksData,
             CartPrice:0,
             FavoriteList: [],
             CartList: [],
