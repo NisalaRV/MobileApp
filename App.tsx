@@ -7,7 +7,7 @@ import DetailsScreen from './src/screens/DetailsScreen.tsx';
 import PaymentScreen from './src/screens/PaymentScreen.tsx';
 
 const stack = createNativeStackNavigator();
-
+<CustomIcon name='home'/>
 const App = () => {
   return (
    <NavigationContainer>
@@ -17,6 +17,7 @@ const App = () => {
       <stack.Screen name="Payment"  component={PaymentScreen}  options={{animation:'slide_from_bottom'}}></stack.Screen>
     </stack.Navigator>
    </NavigationContainer>
+
   );
 };
 

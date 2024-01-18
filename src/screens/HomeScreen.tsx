@@ -138,11 +138,10 @@ const HomeScreen = () => {
                price={item.price}
                buttonPressHandler={item.buttonPressHandler}/>
             </TouchableOpacity>
-  );
- }}
+          );
+       }}
            />    
-
-
+           
     </ScrollView>
   </View>
   );

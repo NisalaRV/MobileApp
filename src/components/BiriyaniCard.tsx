@@ -1,8 +1,9 @@
 import React from 'react'
-import { Dimensions, ImageBackground, ImageProps, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, ImageBackground, ImageProps, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { BORDERRADIUS, COLORS, FONTSIZE, SPACING } from '../theme/theme';
 import CustomIcon from './CustomIcon';
+import BGIcon from './BGIcon';
 
 const CARD_WIDTH=Dimensions.get('window').width * 0.32;
 
@@ -49,6 +50,21 @@ const BiriyaniCard: React.FC<BiriyaniCardProps> = ({
                     <Text style={styles.CardRatingText}>{average_rating}</Text>
                 </View>
          </ImageBackground>
+         <Text>{name}</Text>
+         <Text>{special_ingredient}</Text>
+         <View>
+            <Text>
+                LKR<Text></Text>
+            </Text>
+            <TouchableOpacity>
+               <BGIcon
+                    color={COLORS.primaryWhiteHex}
+                    name={'add'}
+                    BGColor={COLORS.primaryYellowHex}
+                    size={FONTSIZE.size_10}
+               />
+            </TouchableOpacity>
+         </View>
     </LinearGradient>
   )
 }
