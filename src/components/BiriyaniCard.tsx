@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions, ImageBackground, ImageProps, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
-import { BORDERRADIUS, COLORS, FONTSIZE, SPACING } from '../theme/theme';
+import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/theme';
 import CustomIcon from './CustomIcon';
 import BGIcon from './BGIcon';
 
@@ -46,15 +46,16 @@ const BiriyaniCard: React.FC<BiriyaniCardProps> = ({
                 <View style={styles.CardRatingContainer}>
                     <CustomIcon name={'star'} 
                         color={COLORS.primaryYellowHex} 
-                        size={FONTSIZE.size_18}/>
+                        size={FONTSIZE.size_16}/>
                     <Text style={styles.CardRatingText}>{average_rating}</Text>
                 </View>
          </ImageBackground>
-         <Text>{name}</Text>
-         <Text>{special_ingredient}</Text>
-         <View>
-            <Text>
-                LKR<Text></Text>
+         <Text style={styles.CardTitle}> {name}</Text>
+         <Text style={styles.CardSubTitle}>{special_ingredient}</Text>
+         <View style={styles.CardFooterRow}>
+            <Text style={styles.CardPiceCurrency}>
+                LKR <Text style={styles.CardPrice}
+                >{price.price}</Text>
             </Text>
             <TouchableOpacity>
                <BGIcon
@@ -70,7 +71,10 @@ const BiriyaniCard: React.FC<BiriyaniCardProps> = ({
 }
 
 const styles = StyleSheet.create({
-    CardLinearGradientContainer:{},
+    CardLinearGradientContainer:{
+        padding: SPACING.space_15,
+        borderRadius: BORDERRADIUS.radius_25,
+    },
     CardImageBG:{
         width:CARD_WIDTH,
         height:CARD_WIDTH,
@@ -78,8 +82,51 @@ const styles = StyleSheet.create({
         marginBottom:SPACING.space_15,
         overflow:'hidden',
     },
-    CardRatingContainer:{},
-    CardRatingText:{},
+    CardRatingContainer:{
+        flexDirection: 'row',
+        backgroundColor: COLORS.primaryBlackRGBA,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: SPACING.space_10,
+        paddingHorizontal: SPACING.space_15,
+        position: 'absolute',
+        borderBottomLeftRadius: BORDERRADIUS.radius_20,
+        borderTopRightRadius: BORDERRADIUS.radius_20,
+        top: 0,
+        right: 0,
+    },
+    CardRatingText:{
+        fontFamily: FONTFAMILY.poppins_medium,
+        color: COLORS.primaryWhiteHex,
+        lineHeight: 22,
+        fontSize: FONTSIZE.size_14,
+    },
+    CardTitle:{
+        fontFamily: FONTFAMILY.poppins_medium,
+        color: COLORS.primaryWhiteHex,
+        fontSize: FONTSIZE.size_16,
+    },
+    CardSubTitle:{
+        fontFamily: FONTFAMILY.poppins_light,
+        color: COLORS.primaryWhiteHex,
+        fontSize: FONTSIZE.size_10,
+    },
+    CardPiceCurrency:{
+        fontFamily: FONTFAMILY.poppins_semibold,
+        color: COLORS.primaryYellowHex,
+        fontSize: FONTSIZE.size_18,
+    },
+    CardFooterRow:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: SPACING.space_15,
+    },
+    CardPrice:{
+        color:COLORS.primaryWhiteHex,
+        
+    }
+    
 });
 
 export default BiriyaniCard
