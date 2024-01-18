@@ -20,7 +20,7 @@ interface BiriyaniCardProps{
 
 }
 
-const BiriyaniCard:React.FC<BiriyaniCardProps> = ({
+const BiriyaniCard: React.FC<BiriyaniCardProps> = ({
     id,
     index,
     type,
@@ -42,9 +42,11 @@ const BiriyaniCard:React.FC<BiriyaniCardProps> = ({
         <ImageBackground source={imagelink_square}
          style={styles.CardImageBG}
             resizeMode="cover">
-                <View>
-                    <CustomIcon name={'star'} color={COLORS.primaryYellowHex} size={FONTSIZE.size_18}/>
-                    <Text>{average_rating}</Text>
+                <View style={styles.CardRatingContainer}>
+                    <CustomIcon name={'star'} 
+                        color={COLORS.primaryYellowHex} 
+                        size={FONTSIZE.size_18}/>
+                    <Text style={styles.CardRatingText}>{average_rating}</Text>
                 </View>
          </ImageBackground>
     </LinearGradient>
@@ -60,6 +62,8 @@ const styles = StyleSheet.create({
         marginBottom:SPACING.space_15,
         overflow:'hidden',
     },
+    CardRatingContainer:{},
+    CardRatingText:{},
 });
 
 export default BiriyaniCard

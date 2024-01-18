@@ -1,10 +1,13 @@
-import { ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { FlatList, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { useStore } from '../store/store'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING } from '../theme/theme';
 import Header from '../components/Header';
 import CustomIcon from '../components/CustomIcon';
+import BiriyaniCard from '../components/BiriyaniCard';
+
+
 
 const getCategoriesFromData = (data: any) => {
   let temp: any = {};
@@ -114,6 +117,32 @@ const HomeScreen = () => {
               </View>
               ))}
     </ScrollView>
+ {/* Biriyani list*/}
+           <FlatList
+            horizontal showsHorizontalScrollIndicator={false}
+            data={sortedBiriyani} 
+            contentContainerStyle={styles.FlatListContainer}  
+            keyExtractor={item => item.id}
+            renderItem={({item}) => {
+              return (
+            <TouchableOpacity>
+              <BiriyaniCard
+               id={item.id}
+               index={item.index}
+               type={item.type}
+               rosted={item.rosted}
+               imagelink_square={item.imagelink_square}
+               name={item.name}
+               special_ingredient={item.special_ingredient}
+               average_rating={item.average_rating}
+               price={item.price}
+               buttonPressHandler={item.buttonPressHandler}/>
+            </TouchableOpacity>
+  );
+ }}
+           />    
+
+
     </ScrollView>
   </View>
   );
@@ -172,6 +201,11 @@ const styles = StyleSheet.create({
     width: SPACING.space_10,
     borderRadius: BORDERRADIUS.radius_10,
     backgroundColor: COLORS.primaryYellowHex,
+  },
+  FlatListContainer:{
+    gap: SPACING.space_20,
+    paddingVertical: SPACING.space_20,
+    paddingHorizontal: SPACING.space_30,
   },
 })
 
