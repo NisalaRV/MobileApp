@@ -45,7 +45,7 @@ const getBiriyaniList = (category: string, data: any) => {
   }
 };
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: any) => {
   const BiriyaniList = useStore((state: any) => state.BiriyaniList);
   const DrinksList = useStore((state: any) => state.DrinksList);
   const [catagories, setCategories] = useState(
@@ -140,7 +140,9 @@ const HomeScreen = () => {
           keyExtractor={item => item.id}
           renderItem={({item}) => {
             return (
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity onPress={() => {
+                navigation.push('Details')
+              }}>
                 <BiriyaniCard
                   id={item.id}
                   index={item.index}
@@ -170,7 +172,10 @@ const HomeScreen = () => {
           keyExtractor={item => item.id}
           renderItem={({item}) => {
             return (
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity 
+                onPress={() => {
+                 navigation.push('Details');
+              }}>
                 <BiriyaniCard
                   id={item.id}
                   index={item.index}
