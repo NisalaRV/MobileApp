@@ -53,8 +53,8 @@ const HomeScreen = ({navigation}: any) => {
   );
   const [searchText, setSearchText] = useState('');
   const [catagoryIndex, setCategoryIndex] = useState({
-    index: 1,
-    category: catagories[1],
+    index: 0,
+    category: catagories[0],
   });
   const [sortedBiriyani, setSortedBiriyani] = useState(
     getBiriyaniList(catagoryIndex.category, BiriyaniList),
@@ -109,7 +109,12 @@ const HomeScreen = ({navigation}: any) => {
               key={index.toString()}
               style={styles.CategoryScrollViewContainer}>
               <TouchableOpacity
+                style={styles.CategoryScrollViewItem}
                 onPress={() => {
+                  ListRef?.current?.scrollToOffset({
+                    animated: true,
+                    offset: 0,
+                  });
                   setCategoryIndex({index: index, category: catagories[index]});
                   setSortedBiriyani([
                     ...getBiriyaniList(catagories[index], BiriyaniList),
