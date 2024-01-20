@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useStore} from '../store/store';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {
@@ -59,6 +59,8 @@ const HomeScreen = ({navigation}: any) => {
   const [sortedBiriyani, setSortedBiriyani] = useState(
     getBiriyaniList(catagoryIndex.category, BiriyaniList),
   );
+
+  const ListRef: any = useRef<FlatList>();
   const tabBarHeight = useBottomTabBarHeight();
 
   // console.log('sortedBiriyani =', sortedBiriyani.length);
@@ -133,6 +135,7 @@ const HomeScreen = ({navigation}: any) => {
         </ScrollView>
         {/* Biriyani list*/}
         <FlatList
+          ref={ListRef}
           horizontal
           showsHorizontalScrollIndicator={false}
           data={sortedBiriyani}
@@ -140,13 +143,14 @@ const HomeScreen = ({navigation}: any) => {
           keyExtractor={item => item.id}
           renderItem={({item}) => {
             return (
-              <TouchableOpacity onPress={() => {
-                navigation.push('Details',{
-                  index:item.index,
-                  id:item.id,
-                  type:item.type
-                });
-              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push('Details', {
+                    index: item.index,
+                    id: item.id,
+                    type: item.type,
+                  });
+                }}>
                 <BiriyaniCard
                   id={item.id}
                   index={item.index}
@@ -156,7 +160,7 @@ const HomeScreen = ({navigation}: any) => {
                   name={item.name}
                   special_ingredient={item.special_ingredient}
                   average_rating={item.average_rating}
-                  price={item.price}
+                  price={item.price[2]}
                   buttonPressHandler={item.buttonPressHandler}
                 />
               </TouchableOpacity>
@@ -166,6 +170,7 @@ const HomeScreen = ({navigation}: any) => {
         {/* Drinks list*/}
         <Text style={styles.DrinksTitle}>Drinks</Text>
         <FlatList
+          // ref={ListRef}
           horizontal
           showsHorizontalScrollIndicator={false}
           data={DrinksList}
@@ -176,14 +181,14 @@ const HomeScreen = ({navigation}: any) => {
           keyExtractor={item => item.id}
           renderItem={({item}) => {
             return (
-              <TouchableOpacity 
+              <TouchableOpacity
                 onPress={() => {
-                  navigation.push('Details',{
-                    index:item.index,
-                    id:item.id,
-                    type:item.type
+                  navigation.push('Details', {
+                    index: item.index,
+                    id: item.id,
+                    type: item.type,
                   });
-              }}>
+                }}>
                 <BiriyaniCard
                   id={item.id}
                   index={item.index}
@@ -193,7 +198,7 @@ const HomeScreen = ({navigation}: any) => {
                   name={item.name}
                   special_ingredient={item.special_ingredient}
                   average_rating={item.average_rating}
-                  price={item.price}
+                  price={item.price[2]}
                   buttonPressHandler={item.buttonPressHandler}
                 />
               </TouchableOpacity>
